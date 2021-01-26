@@ -2,4 +2,4 @@
 
 Basic website.
 
-Link to [First Blog](2021/January/26 - Storing, Retreiving, and Removing Any Type in a Map.md)
+Link to "https://dariusgrant.github.io/2021/January/26_Storing_Retreiving_Removing_Any_Type_In_Map.md"
