@@ -1,3 +1,3 @@
 # dariusgrant.github.io
 
-Basic website.
+Basic website. [docs](https://help.github.com)
