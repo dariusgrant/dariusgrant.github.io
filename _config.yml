@@ -5,3 +5,4 @@ default:
   values:
    theme: jekyll-theme-cayman
    title: Welcome to Darius' homepage!
+   layout: "default"
