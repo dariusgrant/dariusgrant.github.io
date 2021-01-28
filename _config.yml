@@ -1,2 +1,7 @@
-theme: jekyll-theme-cayman
-title: Welcome to Darius' homepage!
+default:
+ -
+  scope:
+   path: ""
+  values:
+   theme: jekyll-theme-cayman
+   title: Welcome to Darius' homepage!
