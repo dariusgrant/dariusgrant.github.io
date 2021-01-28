@@ -1,7 +1,7 @@
 default:
  -
   scope:
-   path: ""
+   path: "_posts"
    type: "posts"
   values:
    theme: jekyll-theme-cayman
