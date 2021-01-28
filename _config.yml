@@ -2,6 +2,7 @@ default:
  -
   scope:
    path: ""
+   type: "posts"
   values:
    theme: jekyll-theme-cayman
    title: Welcome to Darius' homepage!
