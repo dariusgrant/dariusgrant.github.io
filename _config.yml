@@ -1,3 +1,4 @@
-theme: jekyll-theme-cayman
-title: Welcome to Darius' homepage!
-date: 2021-01-27
+defaults:
+-
+  theme: jekyll-theme-cayman
+  title: Welcome to Darius' homepage!
