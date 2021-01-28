@@ -1,3 +1,2 @@
-defaults:
-   theme: jekyll-theme-cayman
-   title: Welcome to Darius' homepage!
+theme: jekyll-theme-cayman
+title: Welcome to Darius' homepage!
