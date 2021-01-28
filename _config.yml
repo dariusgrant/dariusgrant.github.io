@@ -1,4 +1,8 @@
 defaults:
 -
-  theme: jekyll-theme-cayman
-  title: Welcome to Darius' homepage!
+  scope:
+    path: ""
+  values:
+    theme: jekyll-theme-cayman
+    title: Welcome to Darius' homepage!
+    author: "Darius Grant
