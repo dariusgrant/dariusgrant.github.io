@@ -1,2 +1,7 @@
-theme: jekyll-theme-cayman
-title: "Home page"
+defaults:
+  -
+    scope:
+      path: _posts
+    values:
+      theme: jekyll-theme-cayman
+      title: "Home page"
