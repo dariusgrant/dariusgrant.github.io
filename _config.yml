@@ -1,7 +1,8 @@
 defaults:
   -
     scope:
-      path: ""
+      type: posts
+      path: _posts
     values:
       theme: jekyll-theme-cayman
       title: "Home page"
