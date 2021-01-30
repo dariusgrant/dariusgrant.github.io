@@ -16,7 +16,9 @@ During the time I've been working on my personal project developing with Vulkan 
 However, an issue I ran into is that I wanted to dynamically add to the chain. Maybe there's a check for a certain set of extensions that I wanted to include that was available to the GPU. But I needed to know all the types I wanted to add by compile-time if I was to add them to the tuple. Maybe if C++ had a better reflection system, this could've been made possible.
 
 ## What is it that can make this possible?
-After decades (at least it felt that long) of researching and failing at producing a solution, I stumbled across two key candidates that could make this work: `std::any` and `std::type_info::hash_code`. I played around with these options in various ways, such as trying to retrieve a type based on the hash code to cast the `std::any` object and trying to force a solution into a tuple. However, the issue that persisted is that there was no way to retrieve a type from a the hash code so that I could cast the `std::any` object to it's respective type.
+After decades (at least it felt that long) of researching and failing at producing a solution, I stumbled across two key candidates that could make this work: `std::any` and `std::type_index::hash_code`. Originally, I found `std::type_info::hash_code` and used it in my code but according to [cppreference](https://en.cppreference.com/w/cpp/types/type_info/hash_code), different types could have the same hash code. A kind, online stranger pointed this out and recommended using `std::type_index` instead. 
+
+After I played around with these options in various ways, such as trying to retrieve a type based on the hash code to cast the `std::any` object and trying to force a solution into a tuple. However, the issue that persisted is that there was no way to retrieve a type from a the hash code so that I could cast the `std::any` object to it's respective type.
 
 A little more research and fiddling came as a positive result though. Due to my use-case with Vulkan, I didn't need more than one of the same type to be in the structure. This made it much simpler as now, all I need is a way to identify them and I can store them in `std::map` and have their hash code as the key.
 
@@ -38,23 +40,26 @@ Okay, so the idea is there but how do we actually implement this? Well it's pret
 ```
 template <class T>
 void add( T t_){
-  auto hash = typeid(T).hash_code();
+  auto typeIndex = std::type_index( typeid( T ) );
+  auto hash = typeIndex.hash_code();
   m[hash] = t_;
 }
 
 template <class T>
 T get( T t_){
-  auto obj = map.at( typeid(T).hash_code() );
+  auto typeIndex = std::type_index( typeid( T ) );
+  auto obj = map.at( typeIndex.hash_code() );
   return std::any_cast<T>( obj );
 }
 
 template <class T>
 void remove( T t_){
-  map.erase( typeid(T).hash_code() );
+  auto typeIndex = std::type_index( typeid( T ) );
+  map.erase( typeIndex.hash_code() );
 }
 ```
 
-Of course there's some checks that must happen to make sure you're not casting an object that doesn't exist but that's trivial and should be handled accordingly. I personally chose to handle getting an object by using `std::optional` but it's also because I'm trying to use what I find while journeying through the standard library. The right tools are there.
+Of course there's some checks that must happen to make sure you're not casting an object that doesn't exist but that's trivial and should be handled accordingly. I personally chose to handle getting an object by using `std::optional` but it's also because I'm trying to use what I find while journeying through the standard library and get away from using pointers. There are many ways to do get the same result though so choose the right tools.
 
 ## What are the benefits and limitations?
 Obviously, the biggest benefit is that you can use this with any type dynamically without knowing what you need to add by compile-time. This is huge since C++ lack of reflection holds back a lot of potential for great development. Another benefit is that it's stored in an ordered map as the hash codes are the keys, which makes access logarithmic. It's also extendable to have more than one of the same type by using another data structure as the value such as `std::vector`. 
