@@ -25,6 +25,7 @@ A little more research and fiddling came as a positive result though. Due to my 
 ```
 #include <map>
 #include <any>
+#include <typeindex>
 
 class ArbitraryMap {
   private:
