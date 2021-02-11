@@ -152,7 +152,7 @@ of knowledge.
 
 ## Thank you for reading!
 Thank you for reading my post! These posts are inspired by actual problems I face when developing so it's fun to look over the things I've learned and put it out for
-anyone that may find it useful. Please consider supporting me by adding me on LinkedIn, Github, and/or donating as a continue to progress as a developer.
+anyone that may find it useful. Please consider supporting me by adding me on LinkedIn, Github, and/or donating as I continue to progress as a developer.
 
 [LinkedIn](https://www.linkedin.com/in/darius-grant-783614190)
 
