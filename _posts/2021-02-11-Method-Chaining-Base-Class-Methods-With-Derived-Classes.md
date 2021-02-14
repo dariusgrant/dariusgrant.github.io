@@ -208,34 +208,34 @@ As mentioned already, the benefit is to mix method chaining with base and derive
 the same thing without templates by definining a method once in the base class. Before learning about this, I marked the base methods as virtual and implemented the
 same piece of code in derived classes to achieve method chaining. Obviously, this violates the DRY principle. 
 
-A primary limitation most will face is that there's not much use for implementing this without good cause. There aren't very many use cases for why one might need to use method chaining along with CRTP, at least plausible cases. The builder pattern makes sense of why method chaining would be useful. But for most developers, I'd assume that this would find any merit outside of very specific situations. Some deem method chaining as nothing more than syntatic sugar and a minor conveninece that causes more issues than solving them.
-
-In regards to using the pattern itself, a specific limitation to consider is that multiple inheritance levels is very tricky to get right from what I've discovered. From my testing, one can probably achieve method chaining by having a template argument for the class itself and an argument for the derived class. The outline would be something like below:
+Additionally, it's simple to implement a class that inherits from a base that is several levels up. Below is an example of this, thanks to more constructive criticism from some wonderful online professionals.
 
 ```
-template <class Self, class Derived>
+template <class Derived>
 class Vehicle{
     public:
-        Derived& a(){}
-}
+        Derived& a(){ return static_cast<Derived&>(*this); }
+};
 
-template <class Self, class Derived>
-class Car : public Vehicle<Car<Self, Derived>, Derived>{
+template <class Derived>
+class Car : public Vehicle<Derived>{
     public:
-        Derived& b(){ ... }
-}
+        Derived& b(){ return static_cast<Derived&>(*this); }
+};
 
-template <class Self, class Derived>
-class RaceCar : public Car<RaceCar<Self, Derived>, Derived>{
+template <class Derived>
+class RaceCar : public Car<Derived>{
     public:
-        Derived& c() { ... }
-}
+        Derived& c(){ return static_cast<Derived&>(*this); }
+};
 
-class F1RaceCar : public RaceCar<F1RaceCar, F1RaceCar>{
+class F1RaceCar : public RaceCar<F1RaceCar>{
     public:
-        F1RaceCar& d()) { ... }
-}
+        F1RaceCar& d(){ return *this; }
+};
 ```
+
+A primary limitation most will face is that there's not much use for implementing this without good cause. There aren't very many use cases for why one might need to use method chaining along with CRTP, at least plausible cases. The builder pattern makes sense of why method chaining would be useful. But for most developers, I'd assume that this would find any merit outside of very specific situations. Some deem method chaining as nothing more than syntatic sugar and a minor conveninece that causes more issues than solving them.
 
 ## Thank you for reading!
 Thank you for reading my post! These posts are inspired by actual problems I face when developing so it's fun to look over the things I've learned and put it out for
