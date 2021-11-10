@@ -69,9 +69,3 @@ The limitations that this is that iterating isn't possible. You need to know wha
 
 ## Thank you for reading my first post ever!
 I really appreciate you for making this far! I'd like to continue making this type of blogs as I continue with progressing as a developer and professional (whenever I get an actual job in developing anyway). It's a way of investing in myself as I document my times with tough problems and unique solutions and whatever else I think may be of interest to you all. Please consider donating if you'd like to support me. 
-
-[Paypal](https://www.paypal.com/paypalme/DGrant230)
-
-Venmo: @DGrant230
-
-CashApp: $DGrant230
